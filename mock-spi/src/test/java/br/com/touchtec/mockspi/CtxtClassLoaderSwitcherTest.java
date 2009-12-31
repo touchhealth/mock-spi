@@ -29,8 +29,7 @@ public class CtxtClassLoaderSwitcherTest {
 
 	@Before
 	public void before() {
-		this.loader = new ClassLoader() {
-		};
+		this.loader = new ClassLoader() {};
 	}
 
 	@Test

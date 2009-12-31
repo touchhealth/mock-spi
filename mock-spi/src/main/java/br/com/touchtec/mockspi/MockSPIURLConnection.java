@@ -26,7 +26,7 @@ class MockSPIURLConnection extends URLConnection {
 
 	@Override
 	public void connect() throws IOException {
-		// empty method
+	// empty method
 	}
 
 	private InputStream createInputStream(Binding<?> binding) {

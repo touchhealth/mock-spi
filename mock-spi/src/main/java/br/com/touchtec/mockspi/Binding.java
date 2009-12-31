@@ -14,6 +14,7 @@ public interface Binding<T> extends Iterable<T> {
 
 	static interface Factory {
 		<E> Binding<E> create(Class<E> iface, List<E> impls);
+
 		<E> Binding<E> append(Binding<E> binding, List<E> impls);
 	}
 }

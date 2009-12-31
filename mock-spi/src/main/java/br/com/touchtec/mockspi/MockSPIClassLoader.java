@@ -21,9 +21,8 @@ import com.google.inject.Inject;
  * @author Rodrigo Couto
  * 
  */
-public class MockSPIClassLoader extends DelegateClassLoader
-		implements
-			ClassDefiner {
+public class MockSPIClassLoader extends DelegateClassLoader implements
+		ClassDefiner {
 	// TODO only keeping delegatecl because of weird mockito behaviour
 
 	private final BindingRegistry registry;

@@ -3,7 +3,9 @@ package br.com.touchtec.mockspi;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -19,9 +21,6 @@ import java.util.ServiceLoader;
 import java.util.Set;
 
 import org.junit.Test;
-
-import br.com.touchtec.mockspi.MockSPI;
-import br.com.touchtec.mockspi.MockSPIClassLoader;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -161,7 +160,7 @@ public class MockSPIIntTest {
 			throws Throwable {
 		final IntTestIface iface1 = mock(IntTestIface.class);
 		final IntTestIface iface2 = mock(IntTestIface.class);
-		String[] outs = new String[]{"Ola, Oltra!", "Ola, de novo, Oltra!"};
+		String[] outs = new String[] { "Ola, Oltra!", "Ola, de novo, Oltra!" };
 		final Set<String> expected = Sets.newHashSet(Arrays.asList(outs));
 		when(iface1.greet(eq("Rodrigo"))).thenReturn(outs[0]);
 		when(iface2.greet(eq("Rodrigo"))).thenReturn(outs[1]);
@@ -190,7 +189,7 @@ public class MockSPIIntTest {
 			throws Throwable {
 		final IntTestIface iface1 = mock(IntTestIface.class);
 		final OtherIntTestIface iface2 = mock(OtherIntTestIface.class);
-		String[] outs = new String[]{"Ola, Oltra!", "Ola, de novo, Oltra!"};
+		String[] outs = new String[] { "Ola, Oltra!", "Ola, de novo, Oltra!" };
 		final Set<String> expected = Sets.newHashSet(Arrays.asList(outs));
 		when(iface1.greet(eq("Rodrigo"))).thenReturn(outs[0]);
 		when(iface2.greet(eq("Rodrigo"))).thenReturn(outs[1]);
@@ -207,4 +206,57 @@ public class MockSPIIntTest {
 			}
 		});
 	}
+
+	@Test
+	public void throwerShouldBeInMockCL() throws IOException {
+		final IntTestIface iface = mock(IntTestIface.class);
+		MockSPI.bind(IntTestIface.class, iface).andExpect(IOException.class)
+				.andRun(new Thrower<IOException>() {
+					@Override
+					public void run() throws IOException {
+						assertTrue(Thread.currentThread()
+								.getContextClassLoader() instanceof MockSPIClassLoader);
+					}
+				});
+	}
+
+	@Test
+	public void throwerExceptionShouldBeThrownToClient() {
+		final IntTestIface iface = mock(IntTestIface.class);
+		final IOException ioException = new IOException();
+		try {
+			MockSPI.bind(IntTestIface.class, iface)
+					.andExpect(IOException.class).andRun(
+							new Thrower<IOException>() {
+								@Override
+								public void run() throws IOException {
+									throw ioException;
+								}
+							});
+			fail();
+		} catch (IOException e) {
+			assertSame(ioException, e);
+		}
+	}
+
+	@Test
+	public void throwerRuntimeExceptionShouldBeThrownToClient()
+			throws IOException {
+		final IntTestIface iface = mock(IntTestIface.class);
+		final RuntimeException runtimeException = new RuntimeException();
+		try {
+			MockSPI.bind(IntTestIface.class, iface)
+					.andExpect(IOException.class).andRun(
+							new Thrower<IOException>() {
+								@Override
+								public void run() throws IOException {
+									throw runtimeException;
+								}
+							});
+			fail();
+		} catch (RuntimeException e) {
+			assertSame(runtimeException, e);
+		}
+	}
+
 }

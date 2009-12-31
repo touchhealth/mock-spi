@@ -59,7 +59,7 @@ public class DelegateClassAdapter extends ClassAdapter {
 			@Nullable String signature, @Nullable String superName,
 			@Nullable String[] interfaces) {
 		cv.visit(V1_5, ACC_PUBLIC + ACC_SUPER, implInternalName, null,
-				"java/lang/Object", new String[]{ifaceInternalName});
+				"java/lang/Object", new String[] { ifaceInternalName });
 	}
 
 	private int generateReturnOpcode(String desc) {
@@ -108,6 +108,7 @@ public class DelegateClassAdapter extends ClassAdapter {
 		mv.visitMaxs(1, 1);
 		return mv;
 	}
+
 	@Override
 	public void visitEnd() {
 		MethodVisitor mv;

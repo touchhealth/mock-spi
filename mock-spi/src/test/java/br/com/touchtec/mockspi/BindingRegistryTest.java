@@ -23,8 +23,8 @@ public class BindingRegistryTest {
 	}
 
 	private BindingRegistry empty() {
-		BindingRegistry registry = new BindingRegistry.Factory().create(Collections
-				.<Binding<?>> emptySet());
+		BindingRegistry registry = new BindingRegistry.Factory()
+				.create(Collections.<Binding<?>> emptySet());
 		return registry;
 	}
 

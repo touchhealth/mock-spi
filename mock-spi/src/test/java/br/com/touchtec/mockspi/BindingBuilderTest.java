@@ -14,7 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.touchtec.mockspi.Binding;
-import br.com.touchtec.mockspi.BindingBuilder;
+import br.com.touchtec.mockspi.BindingBuilderImpl;
 import br.com.touchtec.mockspi.Binding.Factory;
 
 public class BindingBuilderTest {
@@ -22,14 +22,14 @@ public class BindingBuilderTest {
 	private Factory mockFactory;
 	private IntTestIface mockImpl1;
 	private IntTestIface mockImpl2;
-	private BindingBuilder builder;
+	private BindingBuilderImpl builder;
 
 	@Before
 	public void before() {
 		mockFactory = mock(Binding.Factory.class);
 		mockImpl1 = mock(IntTestIface.class);
 		mockImpl2 = mock(IntTestIface.class);
-		builder = new BindingBuilder(mockFactory);
+		builder = new BindingBuilderImpl(mockFactory);
 	}
 
 	@Test

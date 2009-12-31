@@ -11,9 +11,8 @@ import com.google.inject.Inject;
 
 public class CtxtClassLoaderSwitcher {
 
-	private final class RuntimeExceptionLogger
-			implements
-				UncaughtExceptionHandler {
+	private final class RuntimeExceptionLogger implements
+			UncaughtExceptionHandler {
 		private RuntimeException throwable;
 
 		@Override

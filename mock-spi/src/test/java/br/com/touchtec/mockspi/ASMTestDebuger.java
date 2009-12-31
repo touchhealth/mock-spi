@@ -34,7 +34,7 @@ public class ASMTestDebuger implements Opcodes {
 
 		cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER,
 				"org/simplethought/mockspi/ASMTest", null, "java/lang/Object",
-				new String[]{"org/simplethought/mockspi/TestIface"});
+				new String[] { "org/simplethought/mockspi/TestIface" });
 
 		cw.visitSource("ASMTest.java", null);
 
@@ -145,7 +145,7 @@ public class ASMTestDebuger implements Opcodes {
 			mv = cw.visitMethod(ACC_PUBLIC, "genericMethod",
 					"(Ljava/lang/Class;)Ljava/lang/Exception;",
 					"<T:Ljava/lang/Exception;>(Ljava/lang/Class<TT;>;)TT;^TT;",
-					new String[]{"java/lang/Exception"});
+					new String[] { "java/lang/Exception" });
 			mv.visitCode();
 			Label l0 = new Label();
 			mv.visitLabel(l0);
