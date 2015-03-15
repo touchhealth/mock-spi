@@ -1,3 +1,5 @@
+![Build status](https://travis-ci.org/rcouto/mock-spi.svg?branch=master "Build status")
+
 This library helps you create integration tests without worrying about `META-INF/services` files and without having visibility problems between single tests.
 
 Here is a little snippet of how to use it:
