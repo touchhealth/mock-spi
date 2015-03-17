@@ -1,4 +1,4 @@
-![Build status](https://travis-ci.org/rcouto/mock-spi.svg?branch=master "Build status")
+![Build status](https://travis-ci.org/rcouto/mock-spi.svg?branch=master "Build status") [![Coverage Status](https://coveralls.io/repos/rcouto/mock-spi/badge.svg)](https://coveralls.io/r/rcouto/mock-spi)
 
 This library helps you create integration tests without worrying about `META-INF/services` files and without having visibility problems between single tests.
 
