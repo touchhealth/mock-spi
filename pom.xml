@@ -61,16 +61,33 @@
 		<name>Touch Tecnologia</name>
 		<url>http://www.touchtec.com.br</url>
 	</organization>
-	<plugins>
-		<plugin>
-			<groupId>org.eluder.coveralls</groupId>
-			<artifactId>coveralls-maven-plugin</artifactId>
-			<version>3.0.1</version>
-			<configuration>
-				<repoToken>3yYdXHR07MfUFDJIeARs9yAyAcWZww14J</repoToken>
-			</configuration>
-		</plugin>
-	</plugins>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eluder.coveralls</groupId>
+				<artifactId>coveralls-maven-plugin</artifactId>
+				<version>3.0.1</version>
+				<configuration>
+					<repoToken>3yYdXHR07MfUFDJIeARs9yAyAcWZww14J</repoToken>
+				</configuration>
+			</plugin>
+	         <plugin>
+	         	<groupId>org.codehaus.mojo</groupId>
+	        	<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>cobertura</goal>
+						</goals>
+					</execution>
+	            </executions>
+				<configuration>
+					<aggregate>true</aggregate>
+				</configuration>
+			</plugin>
+        </plugins>
+	</build>
 	<repositories>
 		<repository>
 			<id>google-maven-repository</id>
